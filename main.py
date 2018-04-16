@@ -45,11 +45,11 @@ def parse_to_output_line(line):
             continue
         contains = False
         for r in results:
-            if r.lower() == '<s>%s</s>\n' % element.lower():
+            if r.lower() == '<s> %s </s>\n' % element.lower():
                 contains = True
                 continue
         if contains is False:
-            results.append('<s>%s</s>\n' % element)
+            results.append('<s> %s </s>\n' % element)
 
     return results
 
