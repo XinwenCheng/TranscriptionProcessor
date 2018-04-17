@@ -80,7 +80,8 @@ def strip_punctuation(str):
         .replace("'m", ' am') \
         .replace("'d", ' would') \
         .replace("'ll", ' will') \
-        .replace("s' ", 's ')
+        .replace("s' ", 's ') \
+        .replace("'ve ", ' have ')
     str = str.translate(None, string.punctuation.replace(DOT, EMPTY_STRING))
 
     while str.__contains__(DOUBLE_BLANK_SPACES):
