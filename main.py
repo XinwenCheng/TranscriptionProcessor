@@ -61,6 +61,7 @@ def strip_punctuation(str):
         return None
 
     str = str.replace("won't", ' would not') \
+        .replace("can't", 'cannot') \
         .replace("n't", ' not') \
         .replace("'re", ' are') \
         .replace("'s", ' is') \
