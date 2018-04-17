@@ -49,7 +49,7 @@ def parse_to_output_line(line):
         #         contains = True
         #         continue
         # if contains is False:
-        results.append('<s> %s </s>\n' % element)
+        results.append('<s> %s </s>\n' % element.lower())
 
     return results
 
