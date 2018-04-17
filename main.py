@@ -1,4 +1,6 @@
 # coding=utf-8
+import itertools
+import string
 
 punctuation_without_dot = """!"#$%&'()*+,-/:;<=>?@[\]^_`{|}~"""
 
@@ -19,7 +21,7 @@ def main():
         # Description (xinwen.cheng@easyto.com): Ignore empty lines.
         if is_empty_string(line):
             continue
-        output_lines += parse_to_output_line(line)
+        output_lines += parse_to_output_lines(line)
 
     with open(output_file_name, 'w') as output_file:
         output_file.writelines(output_lines)
@@ -27,9 +29,11 @@ def main():
     print "DONE with %s lines." % output_lines.__len__()
 
 
-def parse_to_output_line(str):
+def parse_to_output_lines(str):
+    results = []
+
     if is_empty_string(str):
-        return None
+        return results
 
     if str.__contains__(':'):
         str = str.split(':')[1]
@@ -37,10 +41,13 @@ def parse_to_output_line(str):
     str = strip_punctuation(str)
 
     if str is None:
-        return None
+        return results
+
+    if contains_number(str):
+        print str
+        return results
 
     elements = str.split('.')
-    results = []
 
     for element in elements:
         if is_empty_string(element):
@@ -74,6 +81,12 @@ def strip_punctuation(str):
         str = str.replace('  ', ' ')
 
     return str.strip()
+
+
+def contains_number(str):
+    for c in itertools.ifilter(string.digits.__contains__, str):
+        return True
+    return False
 
 
 def is_empty_string(str):
