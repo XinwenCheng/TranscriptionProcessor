@@ -50,7 +50,7 @@ def parse_to_output_lines(str):
 
     if contains_number(str):
         print str
-        return results
+        return results  # TODO: Represent number to string.
 
     elements = str.split(DOT)
 
@@ -90,7 +90,7 @@ def strip_punctuation(str):
 
 
 def contains_number(str):
-    for c in itertools.ifilter(string.digits.__contains__, str):
+    for _ in itertools.ifilter(string.digits.__contains__, str):
         return True
     return False
 
