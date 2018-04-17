@@ -1,5 +1,8 @@
 # coding=utf-8
 
+punctuation_without_dot = """!"#$%&'()*+,-/:;<=>?@[\]^_`{|}~"""
+
+
 def main():
     input_file_name = 'matrix.txt'
     output_file_name = 'corpus.txt'
@@ -16,11 +19,7 @@ def main():
         # Description (xinwen.cheng@easyto.com): Ignore empty lines.
         if is_empty_string(line):
             continue
-        results = parse_to_output_line(line)
-
-        if is_empty_array(results) is False:
-            for result in results:
-                output_lines.append(result)
+        output_lines += parse_to_output_line(line)
 
     with open(output_file_name, 'w') as output_file:
         output_file.writelines(output_lines)
@@ -28,11 +27,19 @@ def main():
     print "DONE with %s lines." % output_lines.__len__()
 
 
-def parse_to_output_line(line):
-    if is_empty_string(line):
+def parse_to_output_line(str):
+    if is_empty_string(str):
         return None
 
-    elements = line.split('.')
+    if str.__contains__(':'):
+        str = str.split(':')[1]
+
+    str = strip_punctuation(str)
+
+    if str is None:
+        return None
+
+    elements = str.split('.')
     results = []
 
     for element in elements:
@@ -43,19 +50,33 @@ def parse_to_output_line(line):
         if element.split(' ').__len__() < 2:
             print 'Ignore line: %s' % element
             continue
-        # contains = False
-        # for r in results:
-        #     if r.lower() == '<s> %s </s>\n' % element.lower():
-        #         contains = True
-        #         continue
-        # if contains is False:
+
         results.append('<s> %s </s>\n' % element.lower())
 
     return results
 
 
-def is_empty_string(content):
-    return content is None or content == '' or content == '\n'
+def strip_punctuation(str):
+    if is_empty_string(str):
+        return None
+
+    str = str.replace("won't", ' would not') \
+        .replace("n't", ' not') \
+        .replace("'re", ' are') \
+        .replace("'s", ' is') \
+        .replace("'m", ' am') \
+        .replace("'d", ' would') \
+        .replace("'ll", ' will')
+    str = str.translate(None, punctuation_without_dot)
+
+    while str.__contains__('  '):
+        str = str.replace('  ', ' ')
+
+    return str.strip()
+
+
+def is_empty_string(str):
+    return str is None or str == '' or str == '\n'
 
 
 def is_empty_array(array):
