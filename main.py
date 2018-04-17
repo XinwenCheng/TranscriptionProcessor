@@ -50,7 +50,7 @@ def parse_to_output_lines(str):
 
     if contains_number(str):
         print str
-        return results  # TODO: Represent number to string.
+        return results  # TODO: Shouldn't return, but represent number to string.
 
     elements = str.split(DOT)
 
