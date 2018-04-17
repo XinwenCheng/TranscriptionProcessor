@@ -2,6 +2,13 @@
 import itertools
 import string
 
+LINE_BREAK = '\n'
+DOUBLE_BLANK_SPACES = '  '
+EMPTY_STRING = ''
+BLANK_SPACE = ' '
+DOT = '.'
+COLON = ':'
+
 
 def main():
     input_file_name = 'matrix.txt'
@@ -33,8 +40,8 @@ def parse_to_output_lines(str):
     if is_empty_string(str):
         return results
 
-    if str.__contains__(':'):
-        str = str.split(':')[1]
+    if str.__contains__(COLON):
+        str = str.split(COLON)[1]
 
     str = strip_punctuation(str)
 
@@ -45,14 +52,14 @@ def parse_to_output_lines(str):
         print str
         return results
 
-    elements = str.split('.')
+    elements = str.split(DOT)
 
     for element in elements:
         if is_empty_string(element):
             continue
-        element = element.strip(' ').strip('\n')
+        element = element.strip(BLANK_SPACE).strip(LINE_BREAK)
         # Description (xinwen.cheng@easyto.com): Ignore line which only contains a single word.
-        if element.split(' ').__len__() < 2:
+        if element.split(BLANK_SPACE).__len__() < 2:
             print 'Ignore line: %s' % element
             continue
 
@@ -73,10 +80,10 @@ def strip_punctuation(str):
         .replace("'m", ' am') \
         .replace("'d", ' would') \
         .replace("'ll", ' will')
-    str = str.translate(None, string.punctuation.replace('.', ''))
+    str = str.translate(None, string.punctuation.replace(DOT, EMPTY_STRING))
 
-    while str.__contains__('  '):
-        str = str.replace('  ', ' ')
+    while str.__contains__(DOUBLE_BLANK_SPACES):
+        str = str.replace(DOUBLE_BLANK_SPACES, BLANK_SPACE)
 
     return str.strip()
 
@@ -88,7 +95,7 @@ def contains_number(str):
 
 
 def is_empty_string(str):
-    return str is None or str == '' or str == '\n'
+    return str is None or str == EMPTY_STRING or str == LINE_BREAK
 
 
 def is_empty_array(array):
