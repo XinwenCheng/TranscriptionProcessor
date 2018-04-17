@@ -2,8 +2,6 @@
 import itertools
 import string
 
-punctuation_without_dot = """!"#$%&'()*+,-/:;<=>?@[\]^_`{|}~"""
-
 
 def main():
     input_file_name = 'matrix.txt'
@@ -75,7 +73,7 @@ def strip_punctuation(str):
         .replace("'m", ' am') \
         .replace("'d", ' would') \
         .replace("'ll", ' will')
-    str = str.translate(None, punctuation_without_dot)
+    str = str.translate(None, string.punctuation.replace('.', ''))
 
     while str.__contains__('  '):
         str = str.replace('  ', ' ')
