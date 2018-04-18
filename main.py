@@ -2,6 +2,10 @@
 import itertools
 import string
 
+import inflect
+
+p_inflect = inflect.engine()
+
 LINE_BREAK = '\n'
 DOUBLE_BLANK_SPACES = '  '
 EMPTY_STRING = ''

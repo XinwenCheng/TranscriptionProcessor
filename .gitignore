@@ -1,3 +1,7 @@
 .idea/
 venv/
 corpus.txt
+*.arpa
+*.idngram
+*.lm.bin
+*.vocab
