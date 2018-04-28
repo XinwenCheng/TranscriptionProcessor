@@ -37,7 +37,7 @@ def dict_process():
                 outputs.append(line)
                 break
 
-    with open('cmudict-en-us.txt', 'w') as output_dict:
+    with open('cmudict-en-us-pruned.dict', 'w') as output_dict:
         output_dict.writelines(outputs)
 
     print('*** DONE ***')
